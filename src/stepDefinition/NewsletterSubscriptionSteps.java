@@ -8,6 +8,7 @@ import pages.LoginPage;
 import pages.ProtonMailHomePage;
 import pages.ProtonMailInbox;
 import pages.ProtonMailLoginPage;
+import pages.RegistrationPage;
 
 public class NewsletterSubscriptionSteps extends BaseClass{
 			
@@ -60,6 +61,18 @@ public class NewsletterSubscriptionSteps extends BaseClass{
 	@Then("^there is a link to finish registration process$")
 	public void there_is_a_link_to_finish_registration_process() throws Throwable {
 		Assert.assertTrue(new ProtonMailInbox(webDriver).is_complete_registration_button_displayed());
+	}
+	
+	@When("^I click Jetzt Anmeldung abschlieBen$")
+	public void i_click_Jetzt_Anmeldung_abschlie_en() throws Throwable {
+		new ProtonMailInbox(webDriver).click_complete_registration_button();
+	}
+
+	@Then("^I am redirected to page confirming subscription \\[https://www\\.hoeffner\\.de/nl-anmeldung\\]$")
+	public void i_am_redirected_to_page_confirming_subscription_https_www_hoeffner_de_nl_anmeldung() throws Throwable {
+		RegistrationPage registrationPage = new RegistrationPage(webDriver);
+		Assert.assertEquals(registrationPage.get_page_title(), "Bestätigung Newsletter-Anmeldung | Möbel Höffner");
+	    Assert.assertTrue(registrationPage.is_registration_acknowledgment_message_displayed());	    
 	}
 	
 }

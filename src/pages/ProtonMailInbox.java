@@ -15,7 +15,7 @@ public class ProtonMailInbox {
 		this.webDriver = webDriver;
 	}
 	
-	public void click_first_mail() throws InterruptedException {
+	public void click_first_mail() {
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); // waiting for the registration email 
 		WebElement emailsListContainer = webDriver.findElement(By.cssSelector("section[class='conversation-wrapper']"));
 		List<WebElement> emailsList = emailsListContainer.findElements(By.xpath(".//*"));
@@ -24,6 +24,10 @@ public class ProtonMailInbox {
 	
 	public boolean is_complete_registration_button_displayed() {
 		return webDriver.findElement(By.cssSelector("a[title='Jetzt Anmeldung abschlieﬂen']")) != null;
+	}
+	
+	public void click_complete_registration_button() {
+		webDriver.findElement(By.cssSelector("a[title='Jetzt Anmeldung abschlieﬂen']")).click();
 	}
 
 }

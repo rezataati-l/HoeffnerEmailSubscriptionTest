@@ -10,3 +10,5 @@ Feature: Subscribe to the newsletter
     And I receive an email asking to confirm my email
     When I open the email
     Then there is a link to finish registration process
+    When I click Jetzt Anmeldung abschlieBen
+    Then I am redirected to page confirming subscription [https://www.hoeffner.de/nl-anmeldung]
