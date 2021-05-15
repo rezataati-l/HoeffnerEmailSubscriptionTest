@@ -7,4 +7,6 @@ Feature: Subscribe to the newsletter
     When I enter my email in the input field
     And I press Absenden button
     Then I can see a confirmation message that my subscription is in progress
-
+    And I receive an email asking to confirm my email
+    When I open the email
+    Then there is a link to finish registration process

@@ -27,7 +27,6 @@ public class LoginPage {
 		WebElement cookiePopup = webDriver.findElement(By.cssSelector(".consentForm__root"));
 		if (cookiePopup!= null) {
 			cookiePopup.findElement(By.cssSelector(".button")).click();
-			System.out.println("### Popup closed. ###");
 		}
 	}
 	
@@ -44,7 +43,7 @@ public class LoginPage {
 	}
 	
 	public boolean is_newsletter_subscription_confirmation_text_displayed() {
-		WebDriverWait webDriverWait = new WebDriverWait(webDriver, 5);
+		WebDriverWait webDriverWait = new WebDriverWait(webDriver, 10);
 		WebElement newsletterSubscriptionConfirmationText = 
 				webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".footerNewsletter__confirmation")));
 		

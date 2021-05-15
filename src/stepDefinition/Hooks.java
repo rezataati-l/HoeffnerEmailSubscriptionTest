@@ -12,6 +12,7 @@ public class Hooks extends BaseClass{
 		// This is where the configuration for different drivers could be placed.
 		System.setProperty("webdriver.gecko.driver","C:\\Program Files (x86)\\Selenium-java-3.141.59\\drivers\\geckodriver.exe");
 		webDriver = new FirefoxDriver();
+		webDriver.manage().window().maximize();
 	}
 
 	@After

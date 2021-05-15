@@ -1,12 +1,13 @@
 package stepDefinition;
 
 import org.junit.Assert;
-
 import cucumber.api.java.en.Given;		
 import cucumber.api.java.en.Then;		
 import cucumber.api.java.en.When;
-
 import pages.LoginPage;
+import pages.ProtonMailHomePage;
+import pages.ProtonMailInbox;
+import pages.ProtonMailLoginPage;
 
 public class NewsletterSubscriptionSteps extends BaseClass{
 			
@@ -41,6 +42,24 @@ public class NewsletterSubscriptionSteps extends BaseClass{
 	@Then("^I can see a confirmation message that my subscription is in progress$")
 	public void i_can_see_a_confirmation_message_that_my_subscription_is_in_progress() throws Throwable {
 		Assert.assertTrue(new LoginPage(webDriver).is_newsletter_subscription_confirmation_text_displayed());
+	}
+	
+	@Then("^I receive an email asking to confirm my email$")
+	public void i_receive_an_email_asking_to_confirm_my_email() throws Throwable {
+		ProtonMailHomePage protonMailLoginPage = new ProtonMailHomePage(webDriver);
+		protonMailLoginPage.open_page();
+		protonMailLoginPage.click_login_button();
+		new ProtonMailLoginPage(webDriver).login();
+	}
+
+	@When("^I open the email$")
+	public void i_open_the_email() throws Throwable {
+		new ProtonMailInbox(webDriver).click_first_mail();
+	}
+
+	@Then("^there is a link to finish registration process$")
+	public void there_is_a_link_to_finish_registration_process() throws Throwable {
+		Assert.assertTrue(new ProtonMailInbox(webDriver).is_complete_registration_button_displayed());
 	}
 	
 }
