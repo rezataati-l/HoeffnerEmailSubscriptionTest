@@ -1,5 +1,6 @@
 package pages;
 
+import java.util.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,14 +25,26 @@ public class LoginPage {
 	}
 	
 	public void close_cookie_popup_if_exists() {
-		WebElement cookiePopup = webDriver.findElement(By.cssSelector(".consentForm__root"));
+		WebElement cookiePopup = null;
+		
+		try {
+			cookiePopup = webDriver.findElement(By.cssSelector(".consentForm__root"));
+		}
+		catch (NoSuchElementException e) {
+			// Nothing is required here.
+		}
+		
 		if (cookiePopup!= null) {
 			cookiePopup.findElement(By.cssSelector(".button")).click();
 		}
 	}
 	
 	public boolean is_newsletter_subscription_input_exists() {
-		return (webDriver.findElement(By.cssSelector("#email")) != null);
+		WebDriverWait webDriverWait = new WebDriverWait(webDriver, 15);
+		WebElement newsletterSubscriptionInput = 
+				webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#email")));
+		
+		return newsletterSubscriptionInput != null;
 	}
 	
 	public void fill_newsletter_subscription_email_input(String emailAddress) {
@@ -43,11 +56,12 @@ public class LoginPage {
 	}
 	
 	public boolean is_newsletter_subscription_confirmation_text_displayed() {
-		WebDriverWait webDriverWait = new WebDriverWait(webDriver, 10);
+		WebDriverWait webDriverWait = new WebDriverWait(webDriver, 15);
 		WebElement newsletterSubscriptionConfirmationText = 
 				webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".footerNewsletter__confirmation")));
+		WebElement nextStepText = newsletterSubscriptionConfirmationText.findElement(By.xpath("//span[.='Nur noch ein Klick und Sie haben es geschafft!']"));
 		
-		return newsletterSubscriptionConfirmationText != null;
+		return nextStepText != null;
 	}
 	
 

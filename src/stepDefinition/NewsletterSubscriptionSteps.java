@@ -72,7 +72,8 @@ public class NewsletterSubscriptionSteps extends BaseClass{
 	public void i_am_redirected_to_page_confirming_subscription_https_www_hoeffner_de_nl_anmeldung() throws Throwable {
 		RegistrationPage registrationPage = new RegistrationPage(webDriver);
 		Assert.assertEquals(registrationPage.get_page_title(), "Bestätigung Newsletter-Anmeldung | Möbel Höffner");
-	    Assert.assertTrue(registrationPage.is_registration_acknowledgment_message_displayed());	    
+	    Assert.assertTrue(registrationPage.is_registration_acknowledgment_message_displayed());
+	    doUnregisterEmailSubscriptionInTearDown = true;
 	}
 	
 }

@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProtonMailHomePage {
 	
@@ -17,7 +20,10 @@ public class ProtonMailHomePage {
 	}
 	
 	public void click_login_button() {
-		webDriver.findElement(By.cssSelector("a[href='https://mail.protonmail.com/login']")).click();
+		WebDriverWait webDriverWait = new WebDriverWait(webDriver, 15);
+		WebElement loginButton = 
+				webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href='https://mail.protonmail.com/login']")));
+		loginButton.click();
 	}
 
 }
